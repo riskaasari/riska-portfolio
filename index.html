@@ -1727,31 +1727,33 @@ Saya menghargai ketelitian, kerja sama tim, kemauan untuk terus belajar, serta k
     <div class="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
 
       <!-- Project 1: Website Arsip UPBU -->
-      <article
-        class="reveal group overflow-hidden rounded-3xl border border-slate-100 bg-white transition hover:-translate-y-1 hover:shadow-xl dark:border-slate-800 dark:bg-panel"
+   <a href="https://riskaasari.github.io/siarsip-demo/" target="_blank" rel="noopener noreferrer">
+  <article
+    class="reveal group overflow-hidden rounded-3xl border border-slate-100 bg-white transition hover:-translate-y-1 hover:shadow-xl dark:border-slate-800 dark:bg-panel"
+  >
+    <div class="aspect-[4/3] overflow-hidden bg-slate-100 dark:bg-slate-900">
+      <img
+        src="dist/img/upbu.png"
+        alt="Website Arsip UPBU"
+        loading="lazy"
+        class="h-full w-full object-cover object-top transition duration-500 group-hover:scale-105"
+      />
+    </div>
+
+    <div class="p-7">
+      <h3 class="text-2xl font-semibold">
+        Website Arsip UPBU
+      </h3>
+
+      <p
+        class="mt-3 text-sm leading-7 text-slate-500 dark:text-slate-400"
       >
-        <div class="aspect-[4/3] overflow-hidden bg-slate-100 dark:bg-slate-900">
-          <img
-            src="dist/img/website-arsip-upbu.png"
-            alt="Website Arsip UPBU"
-            loading="lazy"
-            class="h-full w-full object-cover object-top transition duration-500 group-hover:scale-105"
-          />
-        </div>
-
-        <div class="p-7">
-          <h3 class="text-2xl font-semibold">
-            Website Arsip UPBU
-          </h3>
-
-          <p
-            class="mt-3 text-sm leading-7 text-slate-500 dark:text-slate-400"
-          >
-            A web-based document management system for handling incoming
-            letters, outgoing letters, and document dispositions.
-          </p>
-        </div>
-      </article>
+        A web-based document management system for handling incoming
+        letters, outgoing letters, and document dispositions.
+      </p>
+    </div>
+  </article>
+</a>
 
       <!-- Project 2: Personal Portfolio -->
       <article
@@ -1809,97 +1811,98 @@ Saya menghargai ketelitian, kerja sama tim, kemauan untuk terus belajar, serta k
   </section>
 
       <!-- Contact -->
-      <section
-        id="contact"
-        class="mx-auto max-w-4xl scroll-mt-10 px-6 pb-32 pt-24"
-      >
-        <h2
-          class="reveal text-center text-5xl font-bold tracking-tighter sm:text-6xl"
-        >
-          Contact Me
-        </h2>
-<form
-  id="form"
-  class="reveal mt-16 rounded-3xl border border-slate-200 p-6 shadow-sm dark:border-slate-700 sm:p-12"
+<section
+  id="contact"
+  class="mx-auto max-w-4xl scroll-mt-10 px-6 pb-32 pt-24"
 >
-  <h3 class="text-3xl font-semibold tracking-tight">
-    Send an Email directly.
-  </h3>
-
-  <!-- Name -->
-  <label
-    class="mt-10 block text-xs font-semibold uppercase tracking-widest text-slate-500"
-    for="n"
+  <h2
+    class="reveal text-center text-5xl font-bold tracking-tighter sm:text-6xl"
   >
-    Name
-  </label>
+    Contact Me
+  </h2>
 
-  <input
-    id="n"
-    name="from_name"
-    type="text"
-    required
-    placeholder="John Doe"
-    class="mt-3 w-full rounded-xl border border-slate-100 bg-slate-50 px-5 py-4 outline-none transition focus:border-ink focus:bg-white dark:border-slate-800 dark:bg-panel dark:focus:border-white"
-  />
-
-  <!-- Email -->
-  <label
-    class="mt-6 block text-xs font-semibold uppercase tracking-widest text-slate-500"
-    for="e"
+  <form
+    id="form"
+    class="reveal mt-16 rounded-3xl border border-slate-200 p-6 shadow-sm dark:border-slate-700 sm:p-12"
   >
-    Email
-  </label>
+    <h3 class="text-3xl font-semibold tracking-tight">
+      Send an Email directly.
+    </h3>
 
-  <input
-    id="e"
-    name="from_email"
-    type="email"
-    required
-    placeholder="johndoe@example.com"
-    class="mt-3 w-full rounded-xl border border-slate-100 bg-slate-50 px-5 py-4 outline-none transition focus:border-ink focus:bg-white dark:border-slate-800 dark:bg-panel dark:focus:border-white"
-  />
+    <!-- Name -->
+    <label
+      class="mt-10 block text-xs font-semibold uppercase tracking-widest text-slate-500"
+      for="n"
+    >
+      Name
+    </label>
 
-  <!-- Message -->
-  <label
-    class="mt-6 block text-xs font-semibold uppercase tracking-widest text-slate-500"
-    for="m"
-  >
-    Message
-  </label>
+    <input
+      id="n"
+      name="from_name"
+      type="text"
+      required
+      placeholder="John Doe"
+      class="mt-3 w-full rounded-xl border border-slate-100 bg-slate-50 px-5 py-4 outline-none transition focus:border-ink focus:bg-white dark:border-slate-800 dark:bg-panel dark:focus:border-white"
+    />
 
-  <textarea
-    id="m"
-    name="message"
-    required
-    rows="5"
-    placeholder="Your message here..."
-    class="mt-3 w-full resize-none rounded-xl border border-slate-100 bg-slate-50 px-5 py-4 outline-none transition focus:border-ink focus:bg-white dark:border-slate-800 dark:bg-panel dark:focus:border-white"
-  ></textarea>
+    <!-- Email -->
+    <label
+      class="mt-6 block text-xs font-semibold uppercase tracking-widest text-slate-500"
+      for="e"
+    >
+      Email
+    </label>
 
-  <!-- Submit Button -->
-  <button
-    id="send-button"
-    type="submit"
-    class="mt-8 inline-flex items-center gap-3 rounded-xl bg-ink px-8 py-4 font-semibold text-white transition hover:-translate-y-0.5 hover:shadow-lg dark:bg-white dark:text-ink"
-  >
-    Send Message
+    <input
+      id="e"
+      name="from_email"
+      type="email"
+      required
+      placeholder="johndoe@example.com"
+      class="mt-3 w-full rounded-xl border border-slate-100 bg-slate-50 px-5 py-4 outline-none transition focus:border-ink focus:bg-white dark:border-slate-800 dark:bg-panel dark:focus:border-white"
+    />
 
-    <svg class="h-5 w-5">
-      <use href="#i-arrow"></use>
-    </svg>
-  </button>
+    <!-- Message -->
+    <label
+      class="mt-6 block text-xs font-semibold uppercase tracking-widest text-slate-500"
+      for="m"
+    >
+      Message
+    </label>
 
-  <!-- Status Message -->
-  <p
-    id="form-status"
-    class="mt-4 text-sm"
-    role="status"
-    aria-live="polite"
-  ></p>
-</form>
-      </section>
-    </main>
+    <textarea
+      id="m"
+      name="message"
+      required
+      rows="5"
+      placeholder="Your message here..."
+      class="mt-3 w-full resize-none rounded-xl border border-slate-100 bg-slate-50 px-5 py-4 outline-none transition focus:border-ink focus:bg-white dark:border-slate-800 dark:bg-panel dark:focus:border-white"
+    ></textarea>
+
+    <!-- Submit Button -->
+    <button
+      id="send-button"
+      type="submit"
+      class="mt-8 inline-flex items-center gap-3 rounded-xl bg-ink px-8 py-4 font-semibold text-white transition hover:-translate-y-0.5 hover:shadow-lg dark:bg-white dark:text-ink"
+    >
+      Send Message
+
+      <svg class="h-5 w-5">
+        <use href="#i-arrow"></use>
+      </svg>
+    </button>
+
+    <!-- Status Message -->
+    <p
+      id="form-status"
+      class="mt-4 text-sm"
+      role="status"
+      aria-live="polite"
+    ></p>
+  </form>
+</section>
+</main>
 
     <!-- AI chat -->
     <div class="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
@@ -2122,11 +2125,12 @@ $("#stack-back").innerHTML = [
       $("#chat-btn").onclick = () => $("#chat").classList.toggle("hidden");
       const answers = {
         skills:
-          "React, Next.js, Tailwind CSS, TypeScript on the frontend; Node.js and Prisma on the backend.",
+  "Pengembangan Web: HTML, CSS, JavaScript, dan Tailwind CSS. Pemrograman: Python. Basis Data: perancangan dan pengelolaan basis data. Desain Digital: desain visual dan eksplorasi kreativitas digital. Produktivitas: Microsoft Office.",
         projects:
-          "RISKA Panel, RISKA API, and Elaina Bot (WhatsApp). See the Selected Works section.",
-        contact:
-          "Use the form in the Contact section, or the social links in the hero.",
+  "Website Arsip UPBU, yaitu sistem informasi berbasis web untuk membantu pengelolaan surat masuk, surat keluar, disposisi, dan dokumen. Lihat bagian Proyek Pilihan untuk mengetahui proyek lainnya.",
+  contact:
+  "Untuk menghubungi saya, silakan gunakan formulir pada bagian Kontak atau kunjungi akun media sosial yang tersedia di portofolio ini.",
+
       };
       $$("#chat [data-q]").forEach(
         (b) =>
@@ -2140,5 +2144,60 @@ $("#stack-back").innerHTML = [
           }),
       );
     </script>
+    <!-- EmailJS Library -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<!-- EmailJS Configuration -->
+<script>
+  emailjs.init({
+    publicKey: "okatREhEoJDbMrpEk",
+  });
+
+  const form = document.getElementById("form");
+  const sendButton = document.getElementById("send-button");
+  const formStatus = document.getElementById("form-status");
+
+  form.addEventListener("submit", async function (event) {
+    event.preventDefault();
+
+    sendButton.disabled = true;
+    sendButton.textContent = "Sending...";
+
+    formStatus.textContent = "Sedang mengirim pesan...";
+    formStatus.className = "mt-4 text-sm text-slate-500";
+
+    try {
+      await emailjs.sendForm(
+        "service_uewr9n9",
+        "template_sciax0a",
+        form
+      );
+
+      formStatus.textContent =
+        "Pesan berhasil dikirim! Terima kasih telah menghubungi saya.";
+
+      formStatus.className = "mt-4 text-sm text-green-600";
+
+      form.reset();
+
+    } catch (error) {
+  console.error("EmailJS Error:", error);
+
+  formStatus.textContent =
+    "Gagal mengirim pesan: " + (error.text || error.message || "Terjadi kesalahan.");
+
+  formStatus.className = "mt-4 text-sm text-red-500";
+} finally {
+      sendButton.disabled = false;
+
+      sendButton.innerHTML = `
+        Send Message
+        <svg class="h-5 w-5">
+          <use href="#i-arrow"></use>
+        </svg>
+      `;
+    }
+  });
+</script>
   </body>
 </html>
