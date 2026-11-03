@@ -1,0 +1,2144 @@
+<!doctype html>
+<html lang="id" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Riska | Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            fontFamily: { sans: ["Poppins", "sans-serif"] },
+            colors: { ink: "#0f172a", night: "#0b0f19", panel: "#111827" },
+          },
+        },
+      };
+    </script>
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+      }
+      .reveal {
+        opacity: 0;
+        transform: translateY(20px);
+        transition:
+          opacity 0.7s ease,
+          transform 0.7s ease;
+      }
+      .reveal.in {
+        opacity: 1;
+        transform: none;
+      }
+      #loader {
+        transition:
+          opacity 0.6s ease,
+          visibility 0.6s;
+      }
+      #loader.done {
+        opacity: 0;
+        visibility: hidden;
+      }
+      #bar {
+        transition: width 1.4s cubic-bezier(0.6, 0, 0.2, 1);
+      }
+      .caret::after {
+        content: "";
+        display: inline-block;
+        width: 3px;
+        height: 0.9em;
+        margin-left: 3px;
+        background: currentColor;
+        vertical-align: -0.1em;
+        animation: blink 1s steps(1) infinite;
+      }
+      @keyframes blink {
+        50% {
+          opacity: 0;
+        }
+      }
+      @keyframes floaty {
+        50% {
+          transform: translateY(-8px);
+        }
+      }
+      .floaty {
+        animation: floaty 5s ease-in-out infinite;
+      }
+      .floaty:nth-of-type(2) {
+        animation-delay: 0.8s;
+      }
+      .floaty:nth-of-type(3) {
+        animation-delay: 1.6s;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation: none !important;
+          transition: none !important;
+        }
+        .reveal {
+          opacity: 1;
+          transform: none;
+        }
+      }
+    </style>
+  </head>
+  <body
+    class="bg-white text-ink antialiased dark:bg-night dark:text-slate-100 transition-colors duration-300"
+  >
+    <!-- Icon sprite -->
+    <svg width="0" height="0" class="absolute" aria-hidden="true">
+      <defs>
+        <symbol
+          id="i-arrow"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M5 12h14M13 6l6 6-6 6" />
+        </symbol>
+        <symbol
+          id="i-down"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M12 3v12m-5-5 5 5 5-5M5 21h14" />
+        </symbol>
+        <symbol
+          id="i-clock"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+        >
+          <circle cx="12" cy="12" r="9" />
+          <path d="M12 7v5l3 2" />
+        </symbol>
+        <symbol
+          id="i-code"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="m8 8-5 4 5 4M16 8l5 4-5 4M14 5l-4 14" />
+        </symbol>
+        <symbol
+          id="i-monitor"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <rect x="3" y="4" width="18" height="12" rx="2" />
+          <path d="M8 20h8M12 16v4" />
+        </symbol>
+        <symbol
+          id="i-sun"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+        >
+          <circle cx="12" cy="12" r="4" />
+          <path
+            d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"
+          />
+        </symbol>
+        <symbol
+          id="i-moon"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
+        </symbol>
+        <symbol
+          id="i-insta"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <rect x="3" y="3" width="18" height="18" rx="5" />
+          <circle cx="12" cy="12" r="4" />
+          <circle cx="17.5" cy="6.5" r="1" fill="currentColor" />
+        </symbol>
+        <symbol id="i-github" viewBox="0 0 24 24" fill="currentColor">
+          <path
+            d="M12 .5a11.5 11.5 0 0 0-3.6 22.4c.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.6-.3-5.3-1.3-5.3-5.700 0-1.300.5-2.300 1.200-3.100-.1-.3-.5-1.500.1-3.100 0 0 1-.3 3.200 1.200a11 11 0 0 1 5.800 0c2.200-1.500 3.200-1.200 3.200-1.200.6 1.600.2 2.800.1 3.100.8.8 1.200 1.800 1.200 3.100 0 4.400-2.700 5.400-5.300 5.700.4.4.8 1.100.8 2.200v3.200c0 .3.2.7.8.6A11.500 11.500 0 0 0 12 .5z"
+          />
+        </symbol>
+        <symbol id="i-linkedin" viewBox="0 0 24 24" fill="currentColor">
+          <path
+            d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.500h4V21H3zM9.500 9.500h3.800v1.600h.1c.5-1 1.800-1.900 3.700-1.900 4 0 4.700 2.600 4.700 6V21h-4v-5.200c0-1.300 0-2.900-1.800-2.900s-2 1.400-2 2.800V21h-4z"
+          />
+        </symbol>
+        <symbol
+          id="i-chat"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M21 12a8 8 0 0 1-11.800 7L3 21l2-5.200A8 8 0 1 1 21 12z" />
+          <path d="M8.500 11h.01M12 11h.01M15.500 11h.01" />
+        </symbol>
+        <symbol
+          id="i-menu"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+        >
+          <path d="M4 7h16M4 12h16M4 17h16" />
+        </symbol>
+        <symbol id="i-user" viewBox="0 0 400 500">
+          <path
+            d="M200 70c-45 0-75 35-75 78 0 25 8 40 18 55-25 12-75 30-100 80-15 30-20 217-20 217h350s-5-187-20-217c-25-50-75-68-100-80 10-15 18-30 18-55 0-43-30-78-71-78z"
+            fill="currentColor"
+          />
+        </symbol>
+      </defs>
+    </svg>
+
+    <!-- Loader -->
+    <div
+      id="loader"
+      class="fixed inset-0 z-[100] grid place-items-center bg-white dark:bg-night"
+      style="
+        background-image: radial-gradient(
+          circle at center,
+          #ececec 0,
+          #fff 55%
+        );
+      "
+    >
+      <div class="text-center">
+        <div
+          class="text-4xl font-semibold tracking-tight text-ink dark:text-white"
+        >
+          RISKA
+        </div>
+        <p
+          class="mt-4 text-xs font-medium uppercase tracking-[.35em] text-slate-500"
+        >
+          Portfolio Loading
+        </p>
+        <div
+          class="mx-auto mt-8 h-[2px] w-[min(240px,60vw)] bg-slate-200 dark:bg-slate-700"
+        >
+          <div id="bar" class="h-full w-0 bg-ink dark:bg-white"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Nav -->
+    <header class="fixed inset-x-0 top-4 z-50 px-4">
+      <nav
+        class="mx-auto flex h-14 max-w-6xl items-center justify-between rounded-full bg-white/90 px-6 shadow-[0_8px_30px_rgba(0,0,0,.08)] backdrop-blur dark:bg-panel/90 md:h-16 md:px-8"
+        aria-label="Main"
+      >
+        <a href="#home" class="text-xl font-bold tracking-tight md:text-2xl"
+          >PORTFOLIO.</a
+        >
+        <ul
+          class="hidden items-center gap-9 text-[15px] text-slate-500 md:flex"
+        >
+          <li>
+            <a
+              class="nav-link transition-colors hover:text-ink dark:hover:text-white"
+              href="#home"
+              >Home</a
+            >
+          </li>
+          <li>
+            <a
+              class="nav-link transition-colors hover:text-ink dark:hover:text-white"
+              href="#about"
+              >About</a
+            >
+          </li>
+          <li>
+            <a
+              class="nav-link transition-colors hover:text-ink dark:hover:text-white"
+              href="#experience"
+              >Experience</a
+            >
+          </li>
+          <li>
+            <a
+              class="nav-link transition-colors hover:text-ink dark:hover:text-white"
+              href="#projects"
+              >Projects</a
+            >
+          </li>
+          <li>
+  <a
+    class="nav-link transition-colors hover:text-ink dark:hover:text-white"
+    href="#certifications"
+    >Certifications</a
+  >
+</li>
+          <li>
+            <a
+              class="nav-link transition-colors hover:text-ink dark:hover:text-white"
+              href="#contact"
+              >Contacts</a
+            >
+          </li>
+        </ul>
+        <div class="flex items-center gap-2">
+          <button
+            id="theme"
+            class="grid h-10 w-10 place-items-center rounded-full transition hover:bg-slate-100 dark:hover:bg-slate-800"
+            aria-label="Toggle theme"
+          >
+            <svg class="h-5 w-5"><use id="theme-i" href="#i-sun" /></svg>
+          </button>
+          <button
+            id="burger"
+            class="grid h-10 w-10 place-items-center rounded-full md:hidden"
+            aria-label="Menu"
+            aria-expanded="false"
+          >
+            <svg class="h-5 w-5"><use href="#i-menu" /></svg>
+          </button>
+        </div>
+      </nav>
+      <ul
+        id="mobile"
+        class="mx-auto mt-2 hidden max-w-6xl flex-col gap-1 rounded-3xl bg-white p-3 text-slate-600 shadow-[0_8px_30px_rgba(0,0,0,.1)] dark:bg-panel md:hidden"
+      >
+        <li>
+          <a
+            class="block rounded-xl px-4 py-3 hover:bg-slate-100 dark:hover:bg-slate-800"
+            href="#home"
+            >Home</a
+          >
+        </li>
+        <li>
+          <a
+            class="block rounded-xl px-4 py-3 hover:bg-slate-100 dark:hover:bg-slate-800"
+            href="#about"
+            >About</a
+          >
+        </li>
+        <li>
+          <a
+            class="block rounded-xl px-4 py-3 hover:bg-slate-100 dark:hover:bg-slate-800"
+            href="#experience"
+            >Experience</a
+          >
+        </li>
+        <li>
+          <a
+            class="block rounded-xl px-4 py-3 hover:bg-slate-100 dark:hover:bg-slate-800"
+            href="#projects"
+            >Projects</a
+          >
+        </li>
+         <li>
+          <a
+            class="block rounded-xl px-4 py-3 hover:bg-slate-100 dark:hover:bg-slate-800"
+            href="#certifications"
+            >Certifications</a
+          >
+        </li>
+        <li>
+          <a
+            class="block rounded-xl px-4 py-3 hover:bg-slate-100 dark:hover:bg-slate-800"
+            href="#contact"
+            >Contacts</a
+          >
+        </li>
+      </ul>
+    </header>
+
+    <main>
+      <!-- Hero -->
+      <section
+        id="home"
+        class="mx-auto grid min-h-screen max-w-6xl items-center gap-12 px-6 pb-16 pt-32 lg:grid-cols-[1.1fr_1fr]"
+      >
+        <div class="reveal">
+          <h1
+            class="text-5xl font-bold leading-[1.05] tracking-tighter sm:text-6xl lg:text-7xl"
+          >
+            Hi, I'm Riska
+          </h1>
+          <p class="mt-6 min-h-[2.5rem] text-2xl font-semibold sm:text-3xl">
+            <span id="typed" class="caret"></span>
+          </p>
+          <p
+            class="mt-6 max-w-xl text-lg leading-relaxed text-slate-500 dark:text-slate-400"
+          >
+            Saya memiliki ketertarikan pada pengembangan web, desain digital, dan teknologi informasi. Saya senang mengeksplorasi ide, mempelajari hal baru, serta menggabungkan fungsi dan visual untuk menciptakan pengalaman digital yang menarik dan mudah digunakan.
+          </p>
+          <div class="mt-10 flex flex-wrap gap-4">
+            <a
+              href="#projects"
+              class="inline-flex items-center gap-3 rounded-xl bg-ink px-7 py-4 font-semibold text-white transition hover:-translate-y-0.5 hover:shadow-lg dark:bg-white dark:text-ink"
+              >Explore Work <svg class="h-5 w-5"><use href="#i-arrow" /></svg
+            ></a>
+            <a
+              href="assets/cv.pdf"
+              download
+              class="inline-flex items-center gap-3 rounded-xl border border-slate-200 px-7 py-4 font-semibold transition hover:-translate-y-0.5 hover:shadow-md dark:border-slate-700"
+              >Download CV <svg class="h-5 w-5"><use href="#i-down" /></svg
+            ></a>
+          </div>
+          <div
+            class="mt-12 border-t border-slate-100 pt-8 dark:border-slate-800"
+          >
+            <p
+              class="text-xs font-semibold uppercase tracking-[.2em] text-slate-500"
+            >
+              Connect
+            </p>
+            <div class="mt-4 flex gap-3">
+              <a
+                href="https://www.instagram.com/kimoyyng_?psln=MTYwMmdzcDFxbzY0Ng=="
+                aria-label="Instagram"
+                class="grid h-12 w-12 place-items-center rounded-xl border border-slate-100 transition hover:-translate-y-0.5 hover:shadow-md dark:border-slate-800"
+                ><svg class="h-6 w-6"><use href="#i-insta" /></svg
+              ></a>
+              <a
+                href="https://github.com/kimoyyng"
+                aria-label="GitHub"
+                class="grid h-12 w-12 place-items-center rounded-xl border border-slate-100 transition hover:-translate-y-0.5 hover:shadow-md dark:border-slate-800"
+                ><svg class="h-6 w-6"><use href="#i-github" /></svg
+              ></a>
+            <a
+  href="https://wa.me/6285158606663"
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label="WhatsApp"
+  class="grid h-12 w-12 place-items-center rounded-xl border border-slate-100 transition hover:-translate-y-0.5 hover:shadow-md dark:border-slate-800"
+>
+  <i class="fa-brands fa-whatsapp text-2xl"></i>
+</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal relative mx-auto w-full max-w-[460px] pb-20 lg:pb-0"> 
+          <div
+            class="aspect-square overflow-hidden rounded-full bg-ink text-white shadow-[0_0_0_6px_#fff,0_20px_60px_rgba(0,0,0,.15)] dark:shadow-[0_0_0_6px_#111827]"
+          >
+          <img src="dist/img/fullbody.jpeg" class="h-full w-full object-cover">
+            <svg
+              class="h-full w-full text-slate-200"
+              preserveAspectRatio="xMidYMax slice"
+            >
+              <use href="#i-user" />
+            </svg>
+          </div>
+          <div
+            class="absolute -left-2 bottom-0 flex w-[270px] flex-col gap-3 sm:-left-16 lg:-left-24 lg:bottom-2"
+          >
+            <div
+              class="floaty flex items-center gap-4 rounded-2xl bg-white p-3 shadow-[0_10px_30px_rgba(0,0,0,.08)] dark:bg-panel"
+            >
+              <span
+                class="grid h-12 w-12 place-items-center rounded-xl bg-ink text-white dark:bg-white dark:text-ink"
+                ><i class="fa-solid fa-graduation-cap text-xl"></i></span
+              ><span class="text-sm font-semibold">Information System</span>
+            </div>
+            <div
+              class="floaty flex items-center gap-4 rounded-2xl bg-white p-3 shadow-[0_10px_30px_rgba(0,0,0,.08)] dark:bg-panel"
+            >
+              <span
+                class="grid h-12 w-12 place-items-center rounded-xl bg-ink text-white dark:bg-white dark:text-ink"
+                ><svg class="h-6 w-6"><use href="#i-code" /></svg></span
+              ><span class="text-sm font-semibold"
+                >Web Developer</span
+              >
+            </div>
+            <div
+              class="floaty flex items-center gap-4 rounded-2xl bg-white p-3 shadow-[0_10px_30px_rgba(0,0,0,.08)] dark:bg-panel"
+            >
+              <span
+                class="grid h-12 w-12 place-items-center rounded-xl bg-ink text-white dark:bg-white dark:text-ink"
+                ><svg class="h-6 w-6"><use href="#i-monitor" /></svg></span
+              ><span class="text-sm font-semibold">Document Manajement</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- About -->
+      <section id="about" class="mx-auto max-w-6xl scroll-mt-10 px-6 py-24">
+        <div class="reveal text-center">
+          <p
+            class="text-xs font-semibold uppercase tracking-[.3em] text-slate-400"
+          >
+            Discover
+          </p>
+          <h2 class="mt-2 text-5xl font-bold tracking-tighter sm:text-6xl">
+            About Me
+          </h2>
+        </div>
+        <div class="mt-16 grid items-start gap-12 lg:grid-cols-[.8fr_1.5fr]">
+          <div
+            class="reveal aspect-[4/5] overflow-hidden rounded-3xl bg-gradient-to-b from-ink to-slate-500 shadow-xl"
+          >
+          <img src="dist/img/profile.jpeg" alt="">
+            <svg
+              class="h-full w-full text-slate-100"
+              preserveAspectRatio="xMidYMax slice"
+            >
+              <use href="#i-user" />
+            </svg>
+          </div>
+          <div class="reveal">
+            <div class="grid gap-10 sm:grid-cols-2">
+              <div>
+                <h3
+                  class="border-b border-slate-100 pb-4 text-xl font-semibold dark:border-slate-800"
+                >
+                  Who Am I
+                </h3>
+                <p class="mt-6 leading-8 text-slate-500 dark:text-slate-400">
+                  Saya merupakan lulusan Sistem Informasi yang tertarik pada pengembangan web, pengelolaan basis data, dan desain digital. Saya memiliki pengalaman dalam proyek pengembangan website, pekerjaan administrasi, dan kegiatan organisasi.
+
+Saya juga tertarik pada seni dan bidang kreatif, termasuk seni 3D dan animasi. Bagi saya, teknologi dan kreativitas dapat saling melengkapi untuk menghasilkan karya digital yang fungsional sekaligus menarik secara visual. Saya senang mempelajari hal baru dan terus mengembangkan kemampuan melalui eksplorasi dan praktik.
+                </p>
+              </div>
+              <div>
+                <h3
+                  class="border-b border-slate-100 pb-4 text-xl font-semibold dark:border-slate-800"
+                >
+                  My Approach
+                </h3>
+                <p class="mt-6 leading-8 text-slate-500 dark:text-slate-400">
+                Saya percaya bahwa teknologi dan kreativitas saling melengkapi. Saya ingin menciptakan solusi digital yang fungsional, terstruktur dengan baik, menarik secara visual, dan mudah digunakan.
+
+Saya menghargai ketelitian, kerja sama tim, kemauan untuk terus belajar, serta keberanian untuk mengeksplorasi ide-ide baru.
+                </p>
+              </div>
+            </div>
+            <div class="mt-14">
+              <h3
+                class="border-l-4 border-ink pl-4 text-xl font-semibold dark:border-white"
+              >
+                Personal Details
+              </h3>
+              <hr class="mt-3 border-slate-100 dark:border-slate-800" />
+              <dl class="mt-8 grid gap-8 sm:grid-cols-2">
+                <div>
+                  <dt
+                    class="text-xs font-semibold uppercase tracking-widest text-slate-400"
+                  >
+                    Name
+                  </dt>
+                  <dd class="mt-1 font-semibold">Riska Putri Nilasari</dd>
+                </div>
+                <div>
+                  <dt
+                    class="text-xs font-semibold uppercase tracking-widest text-slate-400"
+                  >
+                    Place of Birth
+                  </dt>
+                  <dd class="mt-1 font-semibold">Timika, Indonesia</dd>
+                </div>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Experience -->
+      <section
+        id="experience"
+        class="mx-auto max-w-6xl scroll-mt-10 px-6 py-24"
+      >
+        <h2
+          class="reveal text-center text-5xl font-bold tracking-tighter sm:text-6xl"
+        >
+          Experience
+        </h2>
+
+        <p
+          class="reveal mx-auto mt-4 max-w-xl text-center leading-7 text-slate-500 dark:text-slate-400"
+        >
+          My professional journey, organizational experience, and continuous
+          learning.
+        </p>
+
+        <!-- Timeline Container -->
+        <div class="relative mt-16">
+          <!-- Continuous Vertical Line -->
+          <div
+            class="absolute bottom-0 left-4 top-0 w-px bg-gradient-to-b from-ink via-slate-300 to-slate-200 dark:from-white dark:via-slate-600 dark:to-slate-700 md:left-1/2 md:-translate-x-1/2"
+          ></div>
+
+          <!-- Experience 1: LEFT -->
+          <div class="relative mb-12 grid grid-cols-1 md:grid-cols-2 md:gap-12">
+            <!-- Timeline Dot -->
+            <span
+              class="absolute left-4 top-8 z-10 h-4 w-4 -translate-x-1/2 rounded-full border-[3px] border-ink bg-white dark:border-white dark:bg-night md:left-1/2"
+            ></span>
+
+            <!-- Card -->
+            <article
+              class="reveal ml-12 rounded-3xl border border-slate-200 p-6 transition duration-300 hover:-translate-y-1 hover:shadow-xl dark:border-slate-700 md:col-start-1 md:row-start-1 md:ml-0 md:mr-8 md:p-8"
+            >
+              <p class="text-sm font-semibold tracking-wider text-slate-500">
+                2025
+              </p>
+
+              <h3 class="mt-4 text-2xl font-semibold leading-snug">
+                Website Development Intern
+              </h3>
+
+              <p
+                class="mt-3 text-sm font-semibold uppercase tracking-wider text-slate-500"
+              >
+                UPBU Mozes Kilangin Timika
+              </p>
+
+              <p class="mt-6 leading-8 text-slate-500 dark:text-slate-400">
+                Berkontribusi dalam pengembangan proyek Website Arsip UPBU untuk mendukung pengelolaan surat-menyurat secara digital, termasuk surat masuk, surat keluar, dan proses disposisi.
+              </p>
+
+              <div
+                class="mt-6 flex flex-wrap gap-2 text-xs font-bold uppercase tracking-wider"
+              >
+                <span
+                  class="rounded-lg bg-slate-100 px-3 py-2 dark:bg-slate-800"
+                >
+                  Web Development
+                </span>
+                <span
+                  class="rounded-lg bg-slate-100 px-3 py-2 dark:bg-slate-800"
+                >
+                  Document Management
+                </span>
+                <span
+                  class="rounded-lg bg-slate-100 px-3 py-2 dark:bg-slate-800"
+                >
+                  Information Systems
+                </span>
+              </div>
+            </article>
+          </div>
+
+          <!-- Experience 2: RIGHT -->
+          <div class="relative mb-12 grid grid-cols-1 md:grid-cols-2 md:gap-12">
+            <span
+              class="absolute left-4 top-8 z-10 h-4 w-4 -translate-x-1/2 rounded-full border-[3px] border-ink bg-white dark:border-white dark:bg-night md:left-1/2"
+            ></span>
+
+            <article
+              class="reveal ml-12 rounded-3xl border border-slate-200 p-6 transition duration-300 hover:-translate-y-1 hover:shadow-xl dark:border-slate-700 md:col-start-2 md:row-start-1 md:ml-8 md:mr-0 md:p-8"
+            >
+              <p class="text-sm font-semibold tracking-wider text-slate-500">
+                ORGANIZATIONAL EXPERIENCE
+              </p>
+
+              <h3 class="mt-4 text-2xl font-semibold leading-snug">
+                Public Relations & Design
+              </h3>
+
+              <p
+                class="mt-3 text-sm font-semibold uppercase tracking-wider text-slate-500"
+              >
+                Menwa (Student Regiment)
+              </p>
+
+              <p class="mt-6 leading-8 text-slate-500 dark:text-slate-400">
+                Bertugas di bidang hubungan masyarakat (humas), termasuk dalam pembuatan desain konten Instagram. Mengembangkan kemampuan komunikasi visual, kerja sama tim, kedisiplinan, dan tanggung jawab melalui kegiatan organisasi.
+              </p>
+
+              <div
+                class="mt-6 flex flex-wrap gap-2 text-xs font-bold uppercase tracking-wider"
+              >
+                <span
+                  class="rounded-lg bg-slate-100 px-3 py-2 dark:bg-slate-800"
+                >
+                  Public Relations
+                </span>
+                <span
+                  class="rounded-lg bg-slate-100 px-3 py-2 dark:bg-slate-800"
+                >
+                  Visual Comunication
+                </span>
+                <span
+                  class="rounded-lg bg-slate-100 px-3 py-2 dark:bg-slate-800"
+                >
+                  Teamwork
+                </span>
+              </div>
+            </article>
+          </div>
+
+          <!-- Experience 3: LEFT -->
+          <div class="relative mb-12 grid grid-cols-1 md:grid-cols-2 md:gap-12">
+            <span
+              class="absolute left-4 top-8 z-10 h-4 w-4 -translate-x-1/2 rounded-full border-[3px] border-ink bg-white dark:border-white dark:bg-night md:left-1/2"
+            ></span>
+
+            <article
+              class="reveal ml-12 rounded-3xl border border-slate-200 p-6 transition duration-300 hover:-translate-y-1 hover:shadow-xl dark:border-slate-700 md:col-start-1 md:row-start-1 md:ml-0 md:mr-8 md:p-8"
+            >
+              <p class="text-sm font-semibold tracking-wider text-slate-500">
+                ADMINISTRATIVE EXPERIENCE
+              </p>
+
+              <h3 class="mt-4 text-2xl font-semibold leading-snug">
+                Administrative Support
+              </h3>
+
+              <p
+                class="mt-3 text-sm font-semibold uppercase tracking-wider text-slate-500"
+              >
+                Pengadilan Agama
+              </p>
+
+              <p class="mt-6 leading-8 text-slate-500 dark:text-slate-400">
+               Mendukung administrasi peradilan melalui pengelolaan jadwal sidang, pencatatan putusan, dan pendataan perkara perceraian, serta memastikan dokumen dan data tercatat dengan rapi dan akurat.
+              </p>
+
+              <div
+                class="mt-6 flex flex-wrap gap-2 text-xs font-bold uppercase tracking-wider"
+              >
+                <span
+                  class="rounded-lg bg-slate-100 px-3 py-2 dark:bg-slate-800"
+                >
+                  Administration
+                </span>
+                <span
+                  class="rounded-lg bg-slate-100 px-3 py-2 dark:bg-slate-800"
+                >
+                  Document Handling
+                </span>
+              </div>
+            </article>
+          </div>
+
+          <!-- Experience 4: RIGHT -->
+          <div class="relative grid grid-cols-1 md:grid-cols-2 md:gap-12">
+            <span
+              class="absolute left-4 top-8 z-10 h-4 w-4 -translate-x-1/2 rounded-full border-[3px] border-ink bg-white dark:border-white dark:bg-night md:left-1/2"
+            ></span>
+
+            <article
+              class="reveal ml-12 rounded-3xl border border-slate-200 p-6 transition duration-300 hover:-translate-y-1 hover:shadow-xl dark:border-slate-700 md:col-start-2 md:row-start-1 md:ml-8 md:mr-0 md:p-8"
+            >
+              <p class="text-sm font-semibold tracking-wider text-slate-500">
+                COMMITTEE EXPERIENCE
+              </p>
+
+              <h3 class="mt-4 text-2xl font-semibold leading-snug">
+                Logistics & IT Support
+              </h3>
+
+              <p
+                class="mt-3 text-sm font-semibold uppercase tracking-wider text-slate-500"
+              >
+                Nusa Putra Character Building
+              </p>
+
+              <p class="mt-6 leading-8 text-slate-500 dark:text-slate-400">
+                Berkontribusi dalam koordinasi logistik dan dukungan teknis IT selama kegiatan kepanitiaan, serta bekerja sama dengan tim untuk mendukung kelancaran acara.
+              </p>
+
+              <div
+                class="mt-6 flex flex-wrap gap-2 text-xs font-bold uppercase tracking-wider"
+              >
+                <span
+                  class="rounded-lg bg-slate-100 px-3 py-2 dark:bg-slate-800"
+                >
+                  Logistics
+                </span>
+                <span
+                  class="rounded-lg bg-slate-100 px-3 py-2 dark:bg-slate-800"
+                >
+                  IT Support
+                </span>
+                <span
+                  class="rounded-lg bg-slate-100 px-3 py-2 dark:bg-slate-800"
+                >
+                  Coordination
+                </span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tech stack -->
+      <section id="stack" class="mx-auto max-w-6xl scroll-mt-10 px-6 py-24">
+        <!-- Judul Tech Stack -->
+        <h2
+          class="reveal text-center text-5xl font-bold tracking-tighter sm:text-6xl"
+        >
+          My Tech Stack
+        </h2>
+
+        <div class="mt-16 space-y-14">
+          <!-- Office & Productivity -->
+<div class="reveal grid items-center gap-8 lg:grid-cols-[1fr_2.2fr]">
+  <div>
+    <h3 class="text-2xl font-semibold leading-snug">
+      Office &amp; Productivity
+    </h3>
+    <p class="mt-3 max-w-sm text-sm text-slate-500 dark:text-slate-400">
+      Tools for creating documents, organizing data, and preparing presentations.
+    </p>
+  </div>
+
+  <ul class="grid grid-cols-2 gap-4 sm:grid-cols-4" id="stack-front">
+    <li class="flex items-center gap-3 rounded-xl border border-slate-200 p-4 dark:border-slate-700">
+      <i class="fa-solid fa-file-word text-2xl text-blue-500"></i>
+      <span class="text-sm font-medium">Microsoft Word</span>
+    </li>
+
+    <li class="flex items-center gap-3 rounded-xl border border-slate-200 p-4 dark:border-slate-700">
+      <i class="fa-solid fa-file-excel text-2xl text-green-600"></i>
+      <span class="text-sm font-medium">Microsoft Excel</span>
+    </li>
+
+    <li class="flex items-center gap-3 rounded-xl border border-slate-200 p-4 dark:border-slate-700">
+      <i class="fa-solid fa-file-powerpoint text-2xl text-orange-500"></i>
+      <span class="text-sm font-medium">PowerPoint</span>
+    </li>
+  </ul>
+</div>
+
+<!-- Design & Web Development -->
+<div class="reveal grid items-center gap-8 lg:grid-cols-[1fr_2.2fr]">
+  <div>
+    <h3 class="text-2xl font-semibold leading-snug">
+      Design &amp; Web Development
+    </h3>
+    <p class="mt-3 max-w-sm text-sm text-slate-500 dark:text-slate-400">
+      Exploring visual creativity, designing digital interfaces, and building responsive websites.
+    </p>
+  </div>
+
+  <ul class="grid grid-cols-2 gap-4 sm:grid-cols-4" id="stack-back">
+    <li class="flex items-center gap-3 rounded-xl border border-slate-200 p-4 dark:border-slate-700">
+      <i class="fa-brands fa-figma text-2xl"></i>
+      <span class="text-sm font-medium">Figma</span>
+    </li>
+
+    <li class="flex items-center gap-3 rounded-xl border border-slate-200 p-4 dark:border-slate-700">
+      <i class="fa-solid fa-palette text-2xl text-purple-500"></i>
+      <span class="text-sm font-medium">Canva</span>
+    </li>
+
+    <li class="flex items-center gap-3 rounded-xl border border-slate-200 p-4 dark:border-slate-700">
+      <i class="fa-solid fa-cube text-2xl text-orange-500"></i>
+      <span class="text-sm font-medium">Blender</span>
+    </li>
+
+    <li class="flex items-center gap-3 rounded-xl border border-slate-200 p-4 dark:border-slate-700">
+      <i class="fa-brands fa-html5 text-2xl text-orange-600"></i>
+      <span class="text-sm font-medium">HTML</span>
+    </li>
+
+    <li class="flex items-center gap-3 rounded-xl border border-slate-200 p-4 dark:border-slate-700">
+      <i class="fa-brands fa-css3-alt text-2xl text-blue-500"></i>
+      <span class="text-sm font-medium">CSS</span>
+    </li>
+
+    <li class="flex items-center gap-3 rounded-xl border border-slate-200 p-4 dark:border-slate-700">
+      <i class="fa-solid fa-wind text-2xl text-cyan-500"></i>
+      <span class="text-sm font-medium">JavaScript</span>
+    </li>
+
+        <li class="flex items-center gap-3 rounded-xl border border-slate-200 p-4 dark:border-slate-700">
+      <i class="fa-solid fa-wind text-2xl text-cyan-500"></i>
+      <span class="text-sm font-medium">Tailwind CSS</span>
+    </li>
+  </ul>
+</div>
+
+        <!-- Certifications -->
+        <div id="certifications" class="mt-28 pt-24 scroll-mt-10">
+          <div class="reveal mb-12 text-center">
+            <p
+              class="mb-3 text-sm font-medium uppercase tracking-[0.25em] text-slate-500 dark:text-slate-400"
+            >
+              Learning &amp; Achievement
+            </p>
+
+            <h2 class="text-4xl font-bold tracking-tight sm:text-5xl">
+              Certifications
+            </h2>
+
+            <p
+              class="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-slate-500 dark:text-slate-400"
+            >
+              Certificates that reflect my learning journey and commitment to
+              developing my skills in technology and communication.
+            </p>
+          </div>
+          
+ <!--certification start  -->
+          <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <!-- intership certification -->
+             <article
+  class="reveal group rounded-2xl border border-slate-200 p-6 transition duration-300 hover:-translate-y-1 hover:border-slate-400 hover:shadow-lg dark:border-slate-700 dark:hover:border-slate-500"
+>
+  <div
+    class="flex h-12 w-12 items-center justify-center rounded-xl bg-slate-100 text-lg font-bold dark:bg-slate-800"
+  >
+    UB
+  </div>
+
+  <p
+    class="mt-5 text-xs font-medium uppercase tracking-wider text-slate-500 dark:text-slate-400"
+  >
+    Internship
+  </p>
+
+  <h3 class="mt-2 text-lg font-semibold leading-snug">
+    UPBU Mozes Kilangin Timika
+  </h3>
+
+  <p
+    class="mt-3 text-sm leading-relaxed text-slate-500 dark:text-slate-400"
+  >
+    Praktek Magang pada BLU Kantor UPBU Kelas II Mozes Kilangin Timika (Predikat Sangat Memuaskan).
+  </p>
+
+  <a
+    href="certivicate/intership-certification-UPBU.pdf"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="mt-6 inline-flex items-center gap-2 text-sm font-semibold underline underline-offset-4 transition hover:opacity-60"
+  >
+    View Certificate <span aria-hidden="true">↗</span>
+  </a>
+</article>
+<article
+  class="reveal group rounded-2xl border border-slate-200 p-6 transition duration-300 hover:-translate-y-1 hover:border-slate-400 hover:shadow-lg dark:border-slate-700 dark:hover:border-slate-500"
+>
+  <div
+    class="flex h-12 w-12 items-center justify-center rounded-xl bg-slate-100 text-lg font-bold dark:bg-slate-800"
+  >
+    PA
+  </div>
+
+  <p
+    class="mt-5 text-xs font-medium uppercase tracking-wider text-slate-500 dark:text-slate-400"
+  >
+    Internship
+  </p>
+
+  <h3 class="mt-2 text-lg font-semibold leading-snug">
+    Pengadilan Agama Mimika
+  </h3>
+
+  <p
+    class="mt-3 text-sm leading-relaxed text-slate-500 dark:text-slate-400"
+  >
+    Participant in Student Completion Program (SCP) National Internship Track at Pengadilan Agama Mimika.
+  </p>
+
+  <a
+    href="certivicate/intership-certification-PA.pdf"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="mt-6 inline-flex items-center gap-2 text-sm font-semibold underline underline-offset-4 transition hover:opacity-60"
+  >
+    View Certificate <span aria-hidden="true">↗</span>
+  </a>
+</article>
+            <!-- Sertifikat Python -->
+            <article
+              class="reveal group rounded-2xl border border-slate-200 p-6 transition duration-300 hover:-translate-y-1 hover:border-slate-400 hover:shadow-lg dark:border-slate-700 dark:hover:border-slate-500"
+            >
+              <div
+                class="flex h-12 w-12 items-center justify-center rounded-xl bg-slate-100 text-lg font-bold dark:bg-slate-800"
+              >
+                PY
+              </div>
+
+              <p
+                class="mt-5 text-xs font-medium uppercase tracking-wider text-slate-500 dark:text-slate-400"
+              >
+                Programming
+              </p>
+
+              <h3 class="mt-2 text-lg font-semibold leading-snug">
+                IT Specialist — Python
+              </h3>
+
+              <p
+                class="mt-3 text-sm leading-relaxed text-slate-500 dark:text-slate-400"
+              >
+                Certification in Python programming.
+              </p>
+
+              <a
+                href="certivicate/python-c.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="mt-6 inline-flex items-center gap-2 text-sm font-semibold underline underline-offset-4 transition hover:opacity-60"
+              >
+                View Certificate <span aria-hidden="true">↗</span>
+              </a>
+            </article>
+
+            <!-- Sertifikat Software Development -->
+            <article
+              class="reveal group rounded-2xl border border-slate-200 p-6 transition duration-300 hover:-translate-y-1 hover:border-slate-400 hover:shadow-lg dark:border-slate-700 dark:hover:border-slate-500"
+            >
+              <div
+                class="flex h-12 w-12 items-center justify-center rounded-xl bg-slate-100 text-lg font-bold dark:bg-slate-800"
+              >
+                SD
+              </div>
+
+              <p
+                class="mt-5 text-xs font-medium uppercase tracking-wider text-slate-500 dark:text-slate-400"
+              >
+                Development
+              </p>
+
+              <h3 class="mt-2 text-lg font-semibold leading-snug">
+                Software Development
+              </h3>
+
+              <p
+                class="mt-3 text-sm leading-relaxed text-slate-500 dark:text-slate-400"
+              >
+                Certification in software development.
+              </p>
+
+              <a
+                href="certivicate/IT-SPECIAIST.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="mt-6 inline-flex items-center gap-2 text-sm font-semibold underline underline-offset-4 transition hover:opacity-60"
+              >
+                View Certificate <span aria-hidden="true">↗</span>
+              </a>
+            </article>
+
+            <!-- Sertifikat Microsoft Office -->
+            <article
+              class="reveal group rounded-2xl border border-slate-200 p-6 transition duration-300 hover:-translate-y-1 hover:border-slate-400 hover:shadow-lg dark:border-slate-700 dark:hover:border-slate-500"
+            >
+              <div
+                class="flex h-12 w-12 items-center justify-center rounded-xl bg-slate-100 text-lg font-bold dark:bg-slate-800"
+              >
+                MS
+              </div>
+
+              <p
+                class="mt-5 text-xs font-medium uppercase tracking-wider text-slate-500 dark:text-slate-400"
+              >
+                Productivity
+              </p>
+
+              <h3 class="mt-2 text-lg font-semibold leading-snug">
+                Microsoft Office
+              </h3>
+
+              <p
+                class="mt-3 text-sm leading-relaxed text-slate-500 dark:text-slate-400"
+              >
+                Microsoft Office Accelerated Competency Training and
+                Certification.
+              </p>
+
+              <a
+                href="certivicate/MICROSOFTOFFICE.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="mt-6 inline-flex items-center gap-2 text-sm font-semibold underline underline-offset-4 transition hover:opacity-60"
+              >
+                View Certificate <span aria-hidden="true">↗</span>
+              </a>
+            </article>
+
+            <!-- Sertifikat Public Speaking -->
+            <article
+              class="reveal group rounded-2xl border border-slate-200 p-6 transition duration-300 hover:-translate-y-1 hover:border-slate-400 hover:shadow-lg dark:border-slate-700 dark:hover:border-slate-500"
+            >
+              <div
+                class="flex h-12 w-12 items-center justify-center rounded-xl bg-slate-100 text-lg font-bold dark:bg-slate-800"
+              >
+                PS
+              </div>
+
+              <p
+                class="mt-5 text-xs font-medium uppercase tracking-wider text-slate-500 dark:text-slate-400"
+              >
+                Communication
+              </p>
+
+              <h3 class="mt-2 text-lg font-semibold leading-snug">
+                Public Speaking
+              </h3>
+
+              <p
+                class="mt-3 text-sm leading-relaxed text-slate-500 dark:text-slate-400"
+              >
+                Public Speaking 1 Day — Batch 87.
+              </p>
+
+              <a
+                href="certivicate/PUBLICKSPEAKING.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="mt-6 inline-flex items-center gap-2 text-sm font-semibold underline underline-offset-4 transition hover:opacity-60"
+              >
+                View Certificate <span aria-hidden="true">↗</span>
+              </a>
+            </article>
+            <!-- database sertifikat -->
+            <article
+  class="reveal group rounded-2xl border border-slate-200 p-6 transition duration-300 hover:-translate-y-1 hover:border-slate-400 hover:shadow-lg dark:border-slate-700 dark:hover:border-slate-500"
+>
+  <div
+    class="flex h-12 w-12 items-center justify-center rounded-xl bg-slate-100 text-lg font-bold dark:bg-slate-800"
+  >
+    DB
+  </div>
+
+  <p
+    class="mt-5 text-xs font-medium uppercase tracking-wider text-slate-500 dark:text-slate-400"
+  >
+    IT Specialist
+  </p>
+
+  <h3 class="mt-2 text-lg font-semibold leading-snug">
+    Databases
+  </h3>
+
+  <p
+    class="mt-3 text-sm leading-relaxed text-slate-500 dark:text-slate-400"
+  >
+    Information Technology Specialist Certification in Databases.
+  </p>
+
+  <a
+    href="certivicate/Database Certification.pdf"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="mt-6 inline-flex items-center gap-2 text-sm font-semibold underline underline-offset-4 transition hover:opacity-60"
+  >
+    View Certificate <span aria-hidden="true">↗</span>
+  </a>
+</article>
+<!-- english sertificate -->
+ <article
+  class="reveal group rounded-2xl border border-slate-200 p-6 transition duration-300 hover:-translate-y-1 hover:border-slate-400 hover:shadow-lg dark:border-slate-700 dark:hover:border-slate-500"
+>
+  <div
+    class="flex h-12 w-12 items-center justify-center rounded-xl bg-slate-100 text-lg font-bold dark:bg-slate-800"
+  >
+    EN
+  </div>
+
+  <p
+    class="mt-5 text-xs font-medium uppercase tracking-wider text-slate-500 dark:text-slate-400"
+  >
+    Language Proficiency
+  </p>
+
+  <h3 class="mt-2 text-lg font-semibold leading-snug">
+    EnglishScore — CEFR B1
+  </h3>
+
+  <p
+    class="mt-3 text-sm leading-relaxed text-slate-500 dark:text-slate-400"
+  >
+    British Council EnglishScore Core Skills Certification (Score: 302).
+  </p>
+
+  <a
+    href="certivicate/EnglishScore_Certificate.pdf"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="mt-6 inline-flex items-center gap-2 text-sm font-semibold underline underline-offset-4 transition hover:opacity-60"
+  >
+    View Certificate <span aria-hidden="true">↗</span>
+  </a>
+</article>
+<!-- spanyol certificate -->
+ <article
+  class="reveal group rounded-2xl border border-slate-200 p-6 transition duration-300 hover:-translate-y-1 hover:border-slate-400 hover:shadow-lg dark:border-slate-700 dark:hover:border-slate-500"
+>
+  <div
+    class="flex h-12 w-12 items-center justify-center rounded-xl bg-slate-100 text-lg font-bold dark:bg-slate-800"
+  >
+    AL
+  </div>
+
+  <p
+    class="mt-5 text-xs font-medium uppercase tracking-wider text-slate-500 dark:text-slate-400"
+  >
+    Language Assessment
+  </p>
+
+  <h3 class="mt-2 text-lg font-semibold leading-snug">
+    Altissia CEFR Assessment
+  </h3>
+
+  <p
+    class="mt-3 text-sm leading-relaxed text-slate-500 dark:text-slate-400"
+  >
+    Altissia CEFR Language Assessment Certification (Level A1).
+  </p>
+
+  <a
+    href="certivicate/Certificate-Spanyol.pdf"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="mt-6 inline-flex items-center gap-2 text-sm font-semibold underline underline-offset-4 transition hover:opacity-60"
+  >
+    View Certificate <span aria-hidden="true">↗</span>
+  </a>
+</article>
+<!-- TKDA certificate -->
+ <article
+  class="reveal group rounded-2xl border border-slate-200 p-6 transition duration-300 hover:-translate-y-1 hover:border-slate-400 hover:shadow-lg dark:border-slate-700 dark:hover:border-slate-500"
+>
+  <div
+    class="flex h-12 w-12 items-center justify-center rounded-xl bg-slate-100 text-lg font-bold dark:bg-slate-800"
+  >
+    TPA
+  </div>
+
+  <p
+    class="mt-5 text-xs font-medium uppercase tracking-wider text-slate-500 dark:text-slate-400"
+  >
+    Academic Assessment
+  </p>
+
+  <h3 class="mt-2 text-lg font-semibold leading-snug">
+    Tes Potensi Akademik
+  </h3>
+
+  <p
+    class="mt-3 text-sm leading-relaxed text-slate-500 dark:text-slate-400"
+  >
+    Laporan Skor Tes Potensi Akademik (TPA) Bappenas — Skor Total 451,53.
+  </p>
+
+  <a
+    href="certivicate/TKDA-certificate.jpg"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="mt-6 inline-flex items-center gap-2 text-sm font-semibold underline underline-offset-4 transition hover:opacity-60"
+  >
+    View Certificate <span aria-hidden="true">↗</span>
+  </a>
+</article>
+<article
+  class="reveal group rounded-2xl border border-slate-200 p-6 transition duration-300 hover:-translate-y-1 hover:border-slate-400 hover:shadow-lg dark:border-slate-700 dark:hover:border-slate-500"
+>
+  <div
+    class="flex h-12 w-12 items-center justify-center rounded-xl bg-slate-100 text-lg font-bold dark:bg-slate-800"
+  >
+    CC
+  </div>
+
+  <p
+    class="mt-5 text-xs font-medium uppercase tracking-wider text-slate-500 dark:text-slate-400"
+  >
+    Cybersecurity
+  </p>
+
+  <h3 class="mt-2 text-lg font-semibold leading-snug">
+    ISC2 Certified in Cybersecurity
+  </h3>
+
+  <p
+    class="mt-3 text-sm leading-relaxed text-slate-500 dark:text-slate-400"
+  >
+    Official ISC2 Certified in Cybersecurity (CC) Self-Paced Training Course Completion.
+  </p>
+
+  <a
+    href="certivicate/Cybersecurity-ISC2-Certificate.pdf"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="mt-6 inline-flex items-center gap-2 text-sm font-semibold underline underline-offset-4 transition hover:opacity-60"
+  >
+    View Certificate <span aria-hidden="true">↗</span>
+  </a>
+</article>
+<article
+  class="reveal group rounded-2xl border border-slate-200 p-6 transition duration-300 hover:-translate-y-1 hover:border-slate-400 hover:shadow-lg dark:border-slate-700 dark:hover:border-slate-500"
+>
+  <div
+    class="flex h-12 w-12 items-center justify-center rounded-xl bg-slate-100 text-lg font-bold dark:bg-slate-800"
+  >
+    SI
+  </div>
+
+  <p
+    class="mt-5 text-xs font-medium uppercase tracking-wider text-slate-500 dark:text-slate-400"
+  >
+    Workshop
+  </p>
+
+  <h3 class="mt-2 text-lg font-semibold leading-snug">
+    Information Systems Workshop 2026
+  </h3>
+
+  <p
+    class="mt-3 text-sm leading-relaxed text-slate-500 dark:text-slate-400"
+  >
+    Participant in Information Systems Workshop organized by Nusa Putra University.
+  </p>
+
+  <a
+    href="certivicate/09_082_workshop_si_2026_copy.pdf"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="mt-6 inline-flex items-center gap-2 text-sm font-semibold underline underline-offset-4 transition hover:opacity-60"
+  >
+    View Certificate <span aria-hidden="true">↗</span>
+  </a>
+</article>
+<article
+  class="reveal group rounded-2xl border border-slate-200 p-6 transition duration-300 hover:-translate-y-1 hover:border-slate-400 hover:shadow-lg dark:border-slate-700 dark:hover:border-slate-500"
+>
+  <div
+    class="flex h-12 w-12 items-center justify-center rounded-xl bg-slate-100 text-lg font-bold dark:bg-slate-800"
+  >
+    NT
+  </div>
+
+  <p
+    class="mt-5 text-xs font-medium uppercase tracking-wider text-slate-500 dark:text-slate-400"
+  >
+    Self Development
+  </p>
+
+  <h3 class="mt-2 text-lg font-semibold leading-snug">
+    Nutral Series Vol. 7
+  </h3>
+
+  <p
+    class="mt-3 text-sm leading-relaxed text-slate-500 dark:text-slate-400"
+  >
+    Beyond the GPA: Membangun Grit, Resiliensi, dan Literasi Digital di Akademia dan Dunia Kerja.
+  </p>
+
+  <a
+    href="certivicate/workshop_nutral_vol_7_2026.pdf"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="mt-6 inline-flex items-center gap-2 text-sm font-semibold underline underline-offset-4 transition hover:opacity-60"
+  >
+    View Certificate <span aria-hidden="true">↗</span>
+  </a>
+</article>
+<article
+  class="reveal group rounded-2xl border border-slate-200 p-6 transition duration-300 hover:-translate-y-1 hover:border-slate-400 hover:shadow-lg dark:border-slate-700 dark:hover:border-slate-500"
+>
+  <div
+    class="flex h-12 w-12 items-center justify-center rounded-xl bg-slate-100 text-lg font-bold dark:bg-slate-800"
+  >
+    IC
+  </div>
+
+  <p
+    class="mt-5 text-xs font-medium uppercase tracking-wider text-slate-500 dark:text-slate-400"
+  >
+    International Conference
+  </p>
+
+  <h3 class="mt-2 text-lg font-semibold leading-snug">
+    ICONEXION 2025
+  </h3>
+
+  <p
+    class="mt-3 text-sm leading-relaxed text-slate-500 dark:text-slate-400"
+  >
+    Audience at The 4th International Conference and Exhibition on Visual Communication Design, University of Aizu, Japan.
+  </p>
+
+  <a
+    href="certivicate/conference_iconexion.pdf"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="mt-6 inline-flex items-center gap-2 text-sm font-semibold underline underline-offset-4 transition hover:opacity-60"
+  >
+    View Certificate <span aria-hidden="true">↗</span>
+  </a>
+</article>
+<article
+  class="reveal group rounded-2xl border border-slate-200 p-6 transition duration-300 hover:-translate-y-1 hover:border-slate-400 hover:shadow-lg dark:border-slate-700 dark:hover:border-slate-500"
+>
+  <div
+    class="flex h-12 w-12 items-center justify-center rounded-xl bg-slate-100 text-lg font-bold dark:bg-slate-800"
+  >
+    IT
+  </div>
+
+  <p
+    class="mt-5 text-xs font-medium uppercase tracking-wider text-slate-500 dark:text-slate-400"
+  >
+    International Conference
+  </p>
+
+  <h3 class="mt-2 text-lg font-semibold leading-snug">
+    ICITACS 2025
+  </h3>
+
+  <p
+    class="mt-3 text-sm leading-relaxed text-slate-500 dark:text-slate-400"
+  >
+    Audience at The 3rd International Conference on Information Technology and Advanced Computer Science, University of Aizu, Japan.
+  </p>
+
+  <a
+    href="certivicate/conference_icitacs_2025.pdf"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="mt-6 inline-flex items-center gap-2 text-sm font-semibold underline underline-offset-4 transition hover:opacity-60"
+  >
+    View Certificate <span aria-hidden="true">↗</span>
+  </a>
+</article>
+<article
+  class="reveal group rounded-2xl border border-slate-200 p-6 transition duration-300 hover:-translate-y-1 hover:border-slate-400 hover:shadow-lg dark:border-slate-700 dark:hover:border-slate-500"
+>
+  <div
+    class="flex h-12 w-12 items-center justify-center rounded-xl bg-slate-100 text-lg font-bold dark:bg-slate-800"
+  >
+    AI
+  </div>
+
+  <p
+    class="mt-5 text-xs font-medium uppercase tracking-wider text-slate-500 dark:text-slate-400"
+  >
+    Seminar Nasional
+  </p>
+
+  <h3 class="mt-2 text-lg font-semibold leading-snug">
+    SISMATIK 2026
+  </h3>
+
+  <p
+    class="mt-3 text-sm leading-relaxed text-slate-500 dark:text-slate-400"
+  >
+    Peserta Seminar Nasional Artificial Intelligence dalam Sistem Informasi: Tren, Inovasi, dan Peluang Karier.
+  </p>
+
+  <a
+    href="certivicate/sismatik_SI_2026.pdf"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="mt-6 inline-flex items-center gap-2 text-sm font-semibold underline underline-offset-4 transition hover:opacity-60"
+  >
+    View Certificate <span aria-hidden="true">↗</span>
+  </a>
+</article>
+<article
+  class="reveal group rounded-2xl border border-slate-200 p-6 transition duration-300 hover:-translate-y-1 hover:border-slate-400 hover:shadow-lg dark:border-slate-700 dark:hover:border-slate-500"
+>
+  <div
+    class="flex h-12 w-12 items-center justify-center rounded-xl bg-slate-100 text-lg font-bold dark:bg-slate-800"
+  >
+    HK
+  </div>
+
+  <p
+    class="mt-5 text-xs font-medium uppercase tracking-wider text-slate-500 dark:text-slate-400"
+  >
+    Seminar Hukum
+  </p>
+
+  <h3 class="mt-2 text-lg font-semibold leading-snug">
+    Sentuhan Keadilan 2026
+  </h3>
+
+  <p
+    class="mt-3 text-sm leading-relaxed text-slate-500 dark:text-slate-400"
+  >
+    Peserta Seminar Nasional Hukum, Kebijakan Publik, HAM, dan Keadilan tentang Implementasi KUHP & KUHAP.
+  </p>
+
+  <a
+    href="certivicate/sentuhankeadilan_Hk_2026.pdf"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="mt-6 inline-flex items-center gap-2 text-sm font-semibold underline underline-offset-4 transition hover:opacity-60"
+  >
+    View Certificate <span aria-hidden="true">↗</span>
+  </a>
+</article>
+<article
+  class="reveal group rounded-2xl border border-slate-200 p-6 transition duration-300 hover:-translate-y-1 hover:border-slate-400 hover:shadow-lg dark:border-slate-700 dark:hover:border-slate-500"
+>
+  <div
+    class="flex h-12 w-12 items-center justify-center rounded-xl bg-slate-100 text-lg font-bold dark:bg-slate-800"
+  >
+    OR
+  </div>
+
+  <p
+    class="mt-5 text-xs font-medium uppercase tracking-wider text-slate-500 dark:text-slate-400"
+  >
+    Organization
+  </p>
+
+  <h3 class="mt-2 text-lg font-semibold leading-snug">
+    Panitia LKBB MENARA IV
+  </h3>
+
+  <p
+    class="mt-3 text-sm leading-relaxed text-slate-500 dark:text-slate-400"
+  >
+    Panitia Lomba Ketangkasan Baris-berbaris MENARA IV Se-Jawa Barat Open, Menwa Universitas Nusa Putra.
+  </p>
+
+  <a
+    href="certivicate/Riska Putri Nilasari PANITIA .pdf"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="mt-6 inline-flex items-center gap-2 text-sm font-semibold underline underline-offset-4 transition hover:opacity-60"
+  >
+    View Certificate <span aria-hidden="true">↗</span>
+  </a>
+</article>
+<article
+  class="reveal group rounded-2xl border border-slate-200 p-6 transition duration-300 hover:-translate-y-1 hover:border-slate-400 hover:shadow-lg dark:border-slate-700 dark:hover:border-slate-500"
+>
+  <div
+    class="flex h-12 w-12 items-center justify-center rounded-xl bg-slate-100 text-lg font-bold dark:bg-slate-800"
+  >
+    DC
+  </div>
+
+  <p
+    class="mt-5 text-xs font-medium uppercase tracking-wider text-slate-500 dark:text-slate-400"
+  >
+    Art Competition
+  </p>
+
+  <h3 class="mt-2 text-lg font-semibold leading-snug">
+    Jabart Drawing Competition 2023
+  </h3>
+
+  <p
+    class="mt-3 text-sm leading-relaxed text-slate-500 dark:text-slate-400"
+  >
+    Finalist Category Favorite at Jabart Drawing Competition 2023, West Java.
+  </p>
+
+  <a
+    href="certivicate/lomba gambar.pdf"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="mt-6 inline-flex items-center gap-2 text-sm font-semibold underline underline-offset-4 transition hover:opacity-60"
+  >
+    View Certificate <span aria-hidden="true">↗</span>
+  </a>
+</article>
+<article
+  class="reveal group rounded-2xl border border-slate-200 p-6 transition duration-300 hover:-translate-y-1 hover:border-slate-400 hover:shadow-lg dark:border-slate-700 dark:hover:border-slate-500"
+>
+  <div
+    class="flex h-12 w-12 items-center justify-center rounded-xl bg-slate-100 text-lg font-bold dark:bg-slate-800"
+  >
+    KG
+  </div>
+
+  <p
+    class="mt-5 text-xs font-medium uppercase tracking-wider text-slate-500 dark:text-slate-400"
+  >
+    Art Competition
+  </p>
+
+  <h3 class="mt-2 text-lg font-semibold leading-snug">
+    Juara 2 Kaligrafi Gebyar Ramadhan
+  </h3>
+
+  <p
+    class="mt-3 text-sm leading-relaxed text-slate-500 dark:text-slate-400"
+  >
+    Juara 2 Kategori Kaligrafi Gebyar Ramadhan yang diselenggarakan oleh HMSI Universitas Nusa Putra.
+  </p>
+
+  <a
+    href="certivicate/kaligrafi.pdf"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="mt-6 inline-flex items-center gap-2 text-sm font-semibold underline underline-offset-4 transition hover:opacity-60"
+  >
+    View Certificate <span aria-hidden="true">↗</span>
+  </a>
+</article>
+<!-- menwa -->
+<article
+  class="reveal group rounded-2xl border border-slate-200 p-6 transition duration-300 hover:-translate-y-1 hover:border-slate-400 hover:shadow-lg dark:border-slate-700 dark:hover:border-slate-500"
+>
+  <div
+    class="flex h-12 w-12 items-center justify-center rounded-xl bg-slate-100 text-lg font-bold dark:bg-slate-800"
+  >
+    MW
+  </div>
+
+  <p
+    class="mt-5 text-xs font-medium uppercase tracking-wider text-slate-500 dark:text-slate-400"
+  >
+    Military Training
+  </p>
+
+  <h3 class="mt-2 text-lg font-semibold leading-snug">
+    Diklatsar Menwa Mahawarman
+  </h3>
+
+  <p
+    class="mt-3 text-sm leading-relaxed text-slate-500 dark:text-slate-400"
+  >
+    Pendidikan dan Latihan Dasar Kemiliteran Resimen Mahasiswa Mahawarman Jabar Angkatan LXIV.
+  </p>
+
+  <a
+    href="certivicate/sertifikat menwa.pdf"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="mt-6 inline-flex items-center gap-2 text-sm font-semibold underline underline-offset-4 transition hover:opacity-60"
+  >
+    View Certificate <span aria-hidden="true">↗</span>
+  </a>
+</article>
+<article
+  class="reveal group rounded-2xl border border-slate-200 p-6 transition duration-300 hover:-translate-y-1 hover:border-slate-400 hover:shadow-lg dark:border-slate-700 dark:hover:border-slate-500"
+>
+  <div
+    class="flex h-12 w-12 items-center justify-center rounded-xl bg-slate-100 text-lg font-bold dark:bg-slate-800"
+  >
+    KM
+  </div>
+
+  <p
+    class="mt-5 text-xs font-medium uppercase tracking-wider text-slate-500 dark:text-slate-400"
+  >
+    Shooting Qualification
+  </p>
+
+  <h3 class="mt-2 text-lg font-semibold leading-snug">
+    Brevet Kualifikasi Menembak
+  </h3>
+
+  <p
+    class="mt-3 text-sm leading-relaxed text-slate-500 dark:text-slate-400"
+  >
+    Sertifikat & Penerimaan Brevet Menembak Menwa Mahawarman Jawa Barat Tahun 2024.
+  </p>
+
+  <a
+    href="certivicate/kualifikasi menembak.pdf"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="mt-6 inline-flex items-center gap-2 text-sm font-semibold underline underline-offset-4 transition hover:opacity-60"
+  >
+    View Certificate <span aria-hidden="true">↗</span>
+  </a>
+</article>
+<article
+  class="reveal group rounded-2xl border border-slate-200 p-6 transition duration-300 hover:-translate-y-1 hover:border-slate-400 hover:shadow-lg dark:border-slate-700 dark:hover:border-slate-500"
+>
+  <div
+    class="flex h-12 w-12 items-center justify-center rounded-xl bg-slate-100 text-lg font-bold dark:bg-slate-800"
+  >
+    LM
+  </div>
+
+  <p
+    class="mt-5 text-xs font-medium uppercase tracking-wider text-slate-500 dark:text-slate-400"
+  >
+    Shooting Competition
+  </p>
+
+  <h3 class="mt-2 text-lg font-semibold leading-snug">
+    Lomba Menembak Senapan Angin PCP
+  </h3>
+
+  <p
+    class="mt-3 text-sm leading-relaxed text-slate-500 dark:text-slate-400"
+  >
+    Peserta Predikat Baik Lomba Menembak PCP 4,5mm HUT Keuangan TNI AD ke-79.
+  </p>
+
+  <a
+    href="certivicate/lomba menembak.pdf"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="mt-6 inline-flex items-center gap-2 text-sm font-semibold underline underline-offset-4 transition hover:opacity-60"
+  >
+    View Certificate <span aria-hidden="true">↗</span>
+  </a>
+</article>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- Projects -->
+      <section id="projects" class="mx-auto max-w-6xl scroll-mt-10 px-6 py-24">
+        <div class="reveal text-center">
+          <p
+            class="text-xs font-semibold uppercase tracking-[.3em] text-slate-500"
+          >
+            My Projects
+          </p>
+
+      <h2 class="mt-3 text-5xl font-bold tracking-tighter sm:text-6xl">
+        Selected Works
+      </h2>
+    </div>
+
+    <!-- Project Cards -->
+    <div class="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+
+      <!-- Project 1: Website Arsip UPBU -->
+      <article
+        class="reveal group overflow-hidden rounded-3xl border border-slate-100 bg-white transition hover:-translate-y-1 hover:shadow-xl dark:border-slate-800 dark:bg-panel"
+      >
+        <div class="aspect-[4/3] overflow-hidden bg-slate-100 dark:bg-slate-900">
+          <img
+            src="dist/img/website-arsip-upbu.png"
+            alt="Website Arsip UPBU"
+            loading="lazy"
+            class="h-full w-full object-cover object-top transition duration-500 group-hover:scale-105"
+          />
+        </div>
+
+        <div class="p-7">
+          <h3 class="text-2xl font-semibold">
+            Website Arsip UPBU
+          </h3>
+
+          <p
+            class="mt-3 text-sm leading-7 text-slate-500 dark:text-slate-400"
+          >
+            A web-based document management system for handling incoming
+            letters, outgoing letters, and document dispositions.
+          </p>
+        </div>
+      </article>
+
+      <!-- Project 2: Personal Portfolio -->
+      <article
+        class="reveal group overflow-hidden rounded-3xl border border-slate-100 bg-white transition hover:-translate-y-1 hover:shadow-xl dark:border-slate-800 dark:bg-panel"
+      >
+        <div class="aspect-[4/3] overflow-hidden bg-slate-100 dark:bg-slate-900">
+          <img
+            src="dist/img/portfolio-preview.png"
+            alt="Personal Portfolio Website"
+            loading="lazy"
+            class="h-full w-full object-cover object-top transition duration-500 group-hover:scale-105"
+          />
+        </div>
+
+        <div class="p-7">
+          <h3 class="text-2xl font-semibold">
+            Personal Portfolio
+          </h3>
+
+          <p
+            class="mt-3 text-sm leading-7 text-slate-500 dark:text-slate-400"
+          >
+            A responsive portfolio website showcasing my background,
+            skills, experience, and web development projects.
+          </p>
+        </div>
+      </article>
+
+      <!-- Project 3: RISKA API -->
+      <article
+        class="reveal group overflow-hidden rounded-3xl border border-slate-100 bg-white transition hover:-translate-y-1 hover:shadow-xl dark:border-slate-800 dark:bg-panel md:col-span-2 lg:col-span-1"
+      >
+        <div class="aspect-[4/3] overflow-hidden bg-slate-100 dark:bg-slate-900">
+          <img
+            src="dist/img/riska-api.png"
+            alt="RISKA API project preview"
+            loading="lazy"
+            class="h-full w-full object-cover object-top transition duration-500 group-hover:scale-105"
+          />
+        </div>
+
+        <div class="p-7">
+          <h3 class="text-2xl font-semibold">
+            RISKA API
+          </h3>
+
+          <p
+            class="mt-3 text-sm leading-7 text-slate-500 dark:text-slate-400"
+          >
+            A REST API platform providing various ready-to-use features.
+          </p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+      <!-- Contact -->
+      <section
+        id="contact"
+        class="mx-auto max-w-4xl scroll-mt-10 px-6 pb-32 pt-24"
+      >
+        <h2
+          class="reveal text-center text-5xl font-bold tracking-tighter sm:text-6xl"
+        >
+          Contact Me
+        </h2>
+<form
+  id="form"
+  class="reveal mt-16 rounded-3xl border border-slate-200 p-6 shadow-sm dark:border-slate-700 sm:p-12"
+>
+  <h3 class="text-3xl font-semibold tracking-tight">
+    Send an Email directly.
+  </h3>
+
+  <!-- Name -->
+  <label
+    class="mt-10 block text-xs font-semibold uppercase tracking-widest text-slate-500"
+    for="n"
+  >
+    Name
+  </label>
+
+  <input
+    id="n"
+    name="from_name"
+    type="text"
+    required
+    placeholder="John Doe"
+    class="mt-3 w-full rounded-xl border border-slate-100 bg-slate-50 px-5 py-4 outline-none transition focus:border-ink focus:bg-white dark:border-slate-800 dark:bg-panel dark:focus:border-white"
+  />
+
+  <!-- Email -->
+  <label
+    class="mt-6 block text-xs font-semibold uppercase tracking-widest text-slate-500"
+    for="e"
+  >
+    Email
+  </label>
+
+  <input
+    id="e"
+    name="from_email"
+    type="email"
+    required
+    placeholder="johndoe@example.com"
+    class="mt-3 w-full rounded-xl border border-slate-100 bg-slate-50 px-5 py-4 outline-none transition focus:border-ink focus:bg-white dark:border-slate-800 dark:bg-panel dark:focus:border-white"
+  />
+
+  <!-- Message -->
+  <label
+    class="mt-6 block text-xs font-semibold uppercase tracking-widest text-slate-500"
+    for="m"
+  >
+    Message
+  </label>
+
+  <textarea
+    id="m"
+    name="message"
+    required
+    rows="5"
+    placeholder="Your message here..."
+    class="mt-3 w-full resize-none rounded-xl border border-slate-100 bg-slate-50 px-5 py-4 outline-none transition focus:border-ink focus:bg-white dark:border-slate-800 dark:bg-panel dark:focus:border-white"
+  ></textarea>
+
+  <!-- Submit Button -->
+  <button
+    id="send-button"
+    type="submit"
+    class="mt-8 inline-flex items-center gap-3 rounded-xl bg-ink px-8 py-4 font-semibold text-white transition hover:-translate-y-0.5 hover:shadow-lg dark:bg-white dark:text-ink"
+  >
+    Send Message
+
+    <svg class="h-5 w-5">
+      <use href="#i-arrow"></use>
+    </svg>
+  </button>
+
+  <!-- Status Message -->
+  <p
+    id="form-status"
+    class="mt-4 text-sm"
+    role="status"
+    aria-live="polite"
+  ></p>
+</form>
+      </section>
+    </main>
+
+    <!-- AI chat -->
+    <div class="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
+      <div
+        id="chat"
+        class="hidden w-[min(340px,calc(100vw-3rem))] overflow-hidden rounded-3xl bg-white shadow-2xl dark:bg-panel"
+      >
+        <div class="bg-ink px-5 py-4 text-sm font-semibold text-white">
+          Ask about Riska
+        </div>
+        <div id="log" class="h-56 space-y-2 overflow-y-auto p-4 text-sm">
+          <p
+            class="max-w-[85%] rounded-2xl bg-slate-100 px-4 py-2 dark:bg-slate-800"
+          >
+            Hi! Ask me about her skills, projects, or how to reach her.
+          </p>
+        </div>
+        <div
+          class="flex flex-wrap gap-2 border-t border-slate-100 p-3 text-xs dark:border-slate-800"
+        >
+          <button
+            data-q="skills"
+            class="rounded-full border border-slate-200 px-3 py-1.5 hover:bg-slate-100 dark:border-slate-700 dark:hover:bg-slate-800"
+          >
+            Skills
+          </button>
+          <button
+            data-q="projects"
+            class="rounded-full border border-slate-200 px-3 py-1.5 hover:bg-slate-100 dark:border-slate-700 dark:hover:bg-slate-800"
+          >
+            Projects
+          </button>
+          <button
+            data-q="contact"
+            class="rounded-full border border-slate-200 px-3 py-1.5 hover:bg-slate-100 dark:border-slate-700 dark:hover:bg-slate-800"
+          >
+            Contact
+          </button>
+        </div>
+      </div>
+      <button
+        id="chat-btn"
+        class="relative grid h-16 w-16 place-items-center rounded-full bg-ink text-white shadow-xl transition hover:scale-105 dark:bg-slate-800"
+        aria-label="Open AI chat"
+      >
+        <svg class="h-7 w-7"><use href="#i-chat" /></svg>
+        <span
+          class="absolute -right-1 -top-1 grid h-6 w-6 place-items-center rounded-full bg-white text-[10px] font-bold text-ink ring-2 ring-emerald-300"
+          >AI</span
+        >
+      </button>
+    </div>
+
+    <script>
+      const $ = (s, r = document) => r.querySelector(s),
+        $$ = (s, r = document) => [...r.querySelectorAll(s)];
+
+      // Loader
+      requestAnimationFrame(() => ($("#bar").style.width = "100%"));
+      addEventListener("load", () =>
+        setTimeout(() => {
+          $("#loader").classList.add("done");
+          $$("#home .reveal").forEach((e) => e.classList.add("in"));
+        }, 1500),
+      );
+
+      // Theme
+      const root = document.documentElement,
+        icon = $("#theme-i");
+      const setTheme = (d) => {
+        root.classList.toggle("dark", d);
+        icon.setAttribute("href", d ? "#i-moon" : "#i-sun");
+        try {
+          localStorage.theme = d ? "dark" : "light";
+        } catch (e) {}
+      };
+      let saved;
+      try {
+        saved = localStorage.theme;
+      } catch (e) {}
+      setTheme(
+        saved
+          ? saved === "dark"
+          : matchMedia("(prefers-color-scheme: dark)").matches,
+      );
+      $("#theme").onclick = () => setTheme(!root.classList.contains("dark"));
+
+      // Mobile menu
+      $("#burger").onclick = (e) => {
+        const m = $("#mobile");
+        m.classList.toggle("hidden");
+        m.classList.toggle("flex");
+        e.currentTarget.setAttribute(
+          "aria-expanded",
+          !m.classList.contains("hidden"),
+        );
+      };
+      $$("#mobile a").forEach(
+        (a) =>
+          (a.onclick = () => {
+            $("#mobile").classList.add("hidden");
+            $("#mobile").classList.remove("flex");
+          }),
+      );
+
+      // Typing
+      const words = ["Web Developer", "Digitall Creative"],
+        t = $("#typed");
+      let w = 0,
+        c = 0,
+        del = false;
+      if (matchMedia("(prefers-reduced-motion: reduce)").matches)
+        t.textContent = words[0];
+      else
+        (function tick() {
+          const word = words[w];
+          t.textContent = word.slice(0, c);
+          if (!del && c === word.length) {
+            del = true;
+            return setTimeout(tick, 1800);
+          }
+          if (del && c === 0) {
+            del = false;
+            w = (w + 1) % words.length;
+          }
+          c += del ? -1 : 1;
+          setTimeout(tick, del ? 40 : 90);
+        })();
+
+// Tech stack tiles
+const tile = (n, l) => {
+  const customLogos = {
+  Canva: `
+  <img
+    src="https://cdn.simpleicons.org/canva"
+    alt="Canva"
+    class="h-8 w-8 object-contain"
+    onerror="this.onerror=null; this.src='https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/canva.svg';"
+  />
+`,
+    Blender: `
+      <img
+        src="https://cdn.simpleicons.org/blender/E87D0D"
+        alt="Blender"
+        class="h-8 w-8 object-contain"
+      />
+    `,
+  };
+
+  const icon = customLogos[n] || `<i class="${l} text-2xl"></i>`;
+
+  return `
+    <li class="flex flex-col items-center gap-4 rounded-2xl border border-slate-100 bg-white px-4 py-7 transition hover:-translate-y-1 hover:shadow-lg dark:border-slate-800 dark:bg-panel">
+      <span class="grid h-14 w-14 place-items-center rounded-full bg-ink text-white dark:bg-white dark:text-ink">
+        ${icon}
+      </span>
+      <span class="text-sm font-semibold">${n}</span>
+    </li>
+  `;
+};
+
+$("#stack-front").innerHTML = [
+  ["Microsoft Word", "fa-solid fa-file-word"],
+  ["Microsoft Excel", "fa-solid fa-file-excel"],
+  ["PowerPoint", "fa-solid fa-file-powerpoint"],
+].map((x) => tile(...x)).join("");
+
+$("#stack-back").innerHTML = [
+  ["Figma", "fa-brands fa-figma"],
+  ["Canva", "fa-solid fa-palette"],
+  ["Blender", "fa-solid fa-cube"],
+  ["HTML", "fa-brands fa-html5"],
+  ["CSS", "fa-brands fa-css3-alt"],
+  ["Tailwind CSS", "fa-solid fa-wind"],
+  ["JavaScript", "fa-brands fa-js"],
+  ["Python", "fa-brands fa-python"],
+  ["SQL", "fa-solid fa-database"],
+].map((x) => tile(...x)).join("");
+
+      // Reveal on scroll + active nav
+      const io = new IntersectionObserver(
+        (es) =>
+          es.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add("in");
+              io.unobserve(e.target);
+            }
+          }),
+        { threshold: 0.12 },
+      );
+      $$(".reveal").forEach((e) => io.observe(e));
+      const links = $$(".nav-link"),
+        secs = ["home", "about", "experience", "projects", "contact"].map(
+          (id) => document.getElementById(id),
+        );
+      const setActive = () => {
+        const y = scrollY + innerHeight * 0.35;
+        let cur = "home";
+        secs.forEach((s) => {
+          if (s.offsetTop <= y) cur = s.id;
+        });
+        links.forEach((a) => {
+          const on = a.getAttribute("href") === "#" + cur;
+          a.classList.toggle("font-semibold", on);
+          a.classList.toggle("text-ink", on);
+          a.classList.toggle("dark:text-white", on);
+        });
+      };
+      addEventListener("scroll", setActive, { passive: true });
+      setActive();
+
+      // Contact form (no backend: opens the visitor's mail app)
+      $("#form").onsubmit = (e) => {
+        e.preventDefault();
+        const body = `${$("#m").value}\n\nFrom: ${$("#n").value} <${$("#e").value}>`;
+        location.href = `mailto:you@example.com?subject=${encodeURIComponent("Portfolio message from " + $("#n").value)}&body=${encodeURIComponent(body)}`;
+      };
+
+      // AI chat (canned answers, no API)
+      $("#chat-btn").onclick = () => $("#chat").classList.toggle("hidden");
+      const answers = {
+        skills:
+          "React, Next.js, Tailwind CSS, TypeScript on the frontend; Node.js and Prisma on the backend.",
+        projects:
+          "RISKA Panel, RISKA API, and Elaina Bot (WhatsApp). See the Selected Works section.",
+        contact:
+          "Use the form in the Contact section, or the social links in the hero.",
+      };
+      $$("#chat [data-q]").forEach(
+        (b) =>
+          (b.onclick = () => {
+            const log = $("#log");
+            log.insertAdjacentHTML(
+              "beforeend",
+              `<p class="ml-auto max-w-[85%] rounded-2xl bg-ink px-4 py-2 text-white dark:bg-white dark:text-ink">${b.textContent}</p><p class="max-w-[85%] rounded-2xl bg-slate-100 px-4 py-2 dark:bg-slate-800">${answers[b.dataset.q]}</p>`,
+            );
+            log.scrollTop = log.scrollHeight;
+          }),
+      );
+    </script>
+  </body>
+</html>
